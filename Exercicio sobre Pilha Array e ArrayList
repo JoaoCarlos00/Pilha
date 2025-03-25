@@ -53,4 +53,130 @@ public class pilhaArray {
 
 
 
-![Image](https://github.com/user-attachments/assets/5e50053c-df87-497a-ab4c-684177772f5c)
+![Image](https://github.com/user-attachments/assets/c8a46e1f-8976-4ab5-a6fe-97ca5169cd4c)
+
+
+
+
+package model;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class PilhaArrayList<T> {
+    // Atributo que armazena os elementos da pilha utilizando ArrayList
+    private ArrayList<T> elementos;
+
+    // Construtor: inicializa a pilha com uma lista vazia
+    public PilhaArrayList() {
+        elementos = new ArrayList<>(); // Criando uma lista dinâmica para armazenar os elementos da pilha
+    }
+
+    // Método que verifica se a pilha está vazia
+    public boolean estaVazia() {
+        return elementos.isEmpty(); // Retorna true se a lista não contiver elementos
+    }
+
+    // Método para empilhar (adicionar) um elemento no topo da pilha
+    public void empilhar(T item) {
+        elementos.add(item); // Adiciona o item no final da lista (equivalente ao topo da pilha)
+    }
+
+    // Método para desempilhar (remover) um elemento no topo da pilha
+    public T desempilhar() {
+        if (estaVazia()) {
+            System.err.println("Erro: A pilha está vazia! Não há elementos para remover.");
+            return null;
+        }
+        return elementos.remove(elementos.size() - 1); // Remove e retorna o último elemento da lista (topo da pilha)
+    }
+
+    // Método para visualizar o elemento do topo sem removê-lo
+    public T topo() {
+        if (estaVazia()) {
+            System.err.println("Erro: A pilha está vazia! Não há elementos no topo");
+            return null;
+        }
+        return elementos.get(elementos.size() - 1);
+    }
+
+    // Método que retorna o tamanho da pilha
+    public int tamanho() {
+        return elementos.size(); // Retorna a quantidade de elementos dentro da pilha
+    }
+
+    // Método que exibe todos os elementos da pilha (de cima para baixo)
+    public void exibirPilha() {
+        if (estaVazia()) {
+            System.out.println("A pilha está vazia!");
+            return;
+        }
+        System.out.println("\nElementos da pilha (do topo para a base): ");
+        for (int i = elementos.size() - 1; i >= 0; i--) {
+            System.out.println("| " + elementos.get(i) + " |");
+        }
+        System.out.println("=====");
+    }
+
+    // Método interativo para testar o funcionamento da pilha
+    public static void main(String[] args) {
+        PilhaArrayList<String> pilha = new PilhaArrayList<>(); // Cria a pilha de Strings
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            // Menu Interativo
+            System.out.println("\n====== MENU PILHA ======");
+            System.out.println("1 - Empilhar Elemento");
+            System.out.println("2 - Desempilhar Elemento");
+            System.out.println("3 - Visualizar Topo");
+            System.out.println("4 - Ver Tamanho da Pilha");
+            System.out.println("5 - Exibir Pilha");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Digite um número.");
+                scanner.next(); // Descarta entrada inválida
+            }
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1: // Empilhar Elemento
+                    System.out.print("Digite o elemento a ser empilhado: ");
+                    String item = scanner.next();
+                    pilha.empilhar(item);
+                    System.out.println("Elemento empilhado com sucesso!");
+                    break;
+
+                case 2: // Desempilhar Elemento
+                    String desempilhado = pilha.desempilhar();
+                    if (desempilhado != null) {
+                        System.out.println("Elemento desempilhado: " + desempilhado);
+                    }
+                    break;
+
+                case 3: // Visualizar Topo
+                    String topo = pilha.topo();
+                    if (topo != null) {
+                        System.out.println("Elemento no topo: " + topo);
+                    }
+                    break;
+
+                case 4: // Ver Tamanho da Pilha
+                    System.out.println("Tamanho da pilha: " + pilha.tamanho());
+                    break;
+
+                case 5: // Exibir Pilha
+                    pilha.exibirPilha();
+                    break;
+
+                default: // Opção inválida
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        } while (opcao != 0);
+
+        scanner.close();
+    }
+}
+![Image](https://github.com/user-attachments/assets/ee226998-2f6d-4798-9b56-04ab289f302a)
