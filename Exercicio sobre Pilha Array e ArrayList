@@ -1,0 +1,53 @@
+package model;
+
+public class pilhaArray {
+	private Object[] pilha; // Vetor que armazena os elementos da pilhas
+	private int topo; // Índice do topo da pilha
+	
+	// Construtor que define o tamanho da pilha
+	public pilhaArray(int tamanho) {
+		pilha = new Object [tamanho];
+		topo = -1; //Índice que a pulha estará vazia inicialmente
+	}
+
+	// Método para verificar se a pilha está vazia
+	public boolean estaVazia() {
+		return topo == 1;
+	}
+	
+	// Método para verificar se a pilha está cheia
+	public boolean estaCheia() {
+		return topo == pilha.length - 1;
+	}
+	
+	// Método para empilhar os elementos
+	public void empilhar (Object elemento) {
+		if (estaCheia()) {
+			System.err.println("Erro: A pilha está cheia! Não é possível adicionar mais elementos.");
+		} else { 
+			pilha [++topo] = elemento; //Incrementa e adiciona o elemento
+			System.out.println("Elemento " + elemento + " empilhado com sucesso.");
+		}
+	}
+	// Método para desempilhar os elementos
+		public Object desempilhar () {
+			if (estaVazia()) {
+				System.err.println("Erro: A pilha está vazia! Não há elementos para remover.");
+				return null;
+			} else { 
+				Object elementoRemovido = pilha[topo];
+				pilha [topo--] = null; //Remove o elemento e decrementa o índice
+				System.out.println("Elemento " + elementoRemovido + " desempilhado com sucesso.");
+				return elementoRemovido;
+			}
+		}
+
+		//Método para obter o elemento do topo sem removê-lo
+		public Object topo() {
+			if (estaVazia()) {
+				System.out.println("Erro: A pilha está vazia! Não há topo!");
+			}
+			return pilha[topo];
+			
+		}
+	
